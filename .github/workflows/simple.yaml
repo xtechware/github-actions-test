@@ -17,6 +17,8 @@ jobs:
         shell: python
   run-windows-commands:
     runs-on: windows-latest
+    # this causes this to run in series to 
+    needs: [run-shell-command]
     steps:
       - name: Directory Powershell
         run: Get-Location
