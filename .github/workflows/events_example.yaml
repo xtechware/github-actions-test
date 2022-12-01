@@ -1,6 +1,25 @@
 # note workflows and jobs run in parallel
+# PRs also have checks from each workflow ... ?
+# PRs also include checks from last push/commit.
 name: Events Example
-on: [push, pull_request, workflow_dispatch]
+# see https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows
+# for events and types
+# By default, a workflow only runs when a pull_request event's activity type is opened, synchronize, or reopened.
+# to override type use object definition instead of list so ...
+# on: [push, pull_request, workflow_dispatch] =>
+# on:
+#   push:
+#   pull_request:
+#     types: [opened, synchronize, reopened]
+#   workflow_dispatch:
+# enable more PR types and filter push events to main and events-test branches
+on:
+  push:
+    branches: [main, events-test, allowed]
+  pull_request:
+    types: [closed, assigned, opened, synchronize, reopened]
+  workflow_dispatch:
+# 
 jobs:
   run-linux-commands:
     runs-on: ubuntu-latest
@@ -44,5 +63,19 @@ jobs:
           echo "${{github.token}}"
           git remote -vv
           git status
-        # pretty much the same as shell_commands on push
+        # pretty much the same as shell_commands on push - all branches
         # GITHUB_EVENT_NAME=push
+        # GITHUB_REF=refs/heads/events-test
+        # on PR create
+        # GITHUB_EVENT_NAME=pull_request
+        # GITHUB_REF=refs/pull/1/merge
+        # on PR merge
+        # GITHUB_EVENT_NAME=push
+        # GITHUB_REF=refs/heads/main
+        # on PR reopen
+        # GITHUB_EVENT_NAME=pull_request
+        # GITHUB_REF=refs/pull/2/merge
+        # on PR close fails checkout step above
+        # on update of source branch of PR
+        # GITHUB_EVENT_NAME=pull_request
+        # GITHUB_REF=refs/pull/2/merge
