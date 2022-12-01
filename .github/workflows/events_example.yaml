@@ -1,6 +1,6 @@
 # note workflows and jobs run in parallel
 # PRs also have checks from each workflow ... ?
-# PRs also include checks from each commit.
+# PRs also include checks from last push/commit.
 name: Events Example
 # see https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows
 # for events and types
@@ -12,9 +12,10 @@ name: Events Example
 #   pull_request:
 #     types: [opened, synchronize, reopened]
 #   workflow_dispatch:
-# enable more PR types
+# enable more PR types and filter push events to main and events-test branches
 on:
   push:
+    branches: [main, events-test]
   pull_request:
     types: [closed, assigned, opened, synchronize, reopened]
   workflow_dispatch:
@@ -75,3 +76,6 @@ jobs:
         # GITHUB_EVENT_NAME=pull_request
         # GITHUB_REF=refs/pull/2/merge
         # on PR close fails checkout step above
+        # on update of source branch of PR
+        # GITHUB_EVENT_NAME=pull_request
+        # GITHUB_REF=refs/pull/2/merge
