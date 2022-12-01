@@ -86,6 +86,13 @@ jobs:
         # drwxr-xr-x 8 runner docker 4096 Dec  1 16:29 .git
         # drwxr-xr-x 3 runner docker 4096 Dec  1 16:29 .github
         # -rw-r--r-- 1 runner docker   21 Dec  1 16:29 README.md
+      - name: Environment Variables and Misc
+        shell: bash
+        run: |
+          printenv | grep 'GITHUB\|STEP`
+          echo "${{github.token}}"
+          git remote -vv
+          git status
   run-windows-commands:
     runs-on: windows-latest
     # this causes this to run in series to 
@@ -124,4 +131,11 @@ jobs:
         # drwxr-xr-x 1 runneradmin 197121  0 Dec  1 16:30 ..
         # drwxr-xr-x 1 runneradmin 197121  0 Dec  1 16:30 .git
         # drwxr-xr-x 1 runneradmin 197121  0 Dec  1 16:30 .github
-        # -rw-r--r-- 1 runneradmin 197121 21 Dec  1 16:30 README.md        
+        # -rw-r--r-- 1 runneradmin 197121 21 Dec  1 16:30 README.md
+      - name: Environment Variables and Misc
+        shell: bash
+        run: |
+          printenv | grep 'GITHUB\|STEP`
+          echo "${{github.token}}"
+          git remote -vv
+          git status
