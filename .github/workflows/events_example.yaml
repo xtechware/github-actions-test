@@ -12,6 +12,7 @@ name: Events Example
 #   pull_request:
 #     types: [opened, synchronize, reopened]
 #   workflow_dispatch:
+# to get pull_request or any other type use ${{github.event.action}}
 # enable more PR types and filter push events to main and events-test branches
 on:
   push:
@@ -32,6 +33,12 @@ jobs:
         run: ls -al
         shell: bash
         # NOTE: This working directory is empty
+        # Added on last run - see notes in Environment Variables and Misc below
+      - name: Some GITHUB Environment Variables
+        shell: bash
+        run: |
+          printenv | grep 'GITHUB_EVENT_NAME\|GITHUB_REF'
+          echo "${{github.event.action}}"
       # now lets checkout our repo instead
       # see https://github.com/actions/checkout#usage for options
       - name: Checkout
@@ -75,7 +82,12 @@ jobs:
         # on PR reopen
         # GITHUB_EVENT_NAME=pull_request
         # GITHUB_REF=refs/pull/2/merge
-        # on PR close fails checkout step above
+        # ${{github.event.action}} = reopened
+        # on PR close fails checkout step above - because I deleted the source branch too quickly, otherwise
+        # GITHUB_EVENT_NAME=pull_request
+        # GITHUB_REF=refs/pull/4/merge
+        # ${{github.event.action}} = closed
         # on update of source branch of PR
         # GITHUB_EVENT_NAME=pull_request
         # GITHUB_REF=refs/pull/2/merge
+        # ${{github.event.action}} = synchronize
