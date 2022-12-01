@@ -1,4 +1,4 @@
-# note workflows run in parallel
+# note workflows and jobs run in parallel
 name: Actions Workflow
 on: [push, workflow_dispatch]
 jobs:

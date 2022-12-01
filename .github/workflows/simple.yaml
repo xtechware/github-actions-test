@@ -1,4 +1,4 @@
-# note workflows run in parallel
+# note workflows and jobs run in parallel
 name: Shell Commands
 on: [push, workflow_dispatch]
 jobs:
@@ -30,7 +30,7 @@ jobs:
   run-windows-commands:
     runs-on: windows-latest
     # this causes this to run in series to 
-    needs: [run-shell-command]
+    needs: [run-linux-command]
     steps:
       - name: Directory Powershell
         run: Get-Location
