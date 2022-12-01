@@ -38,3 +38,4 @@ jobs:
         run: |
           printenv | grep 'GITHUB_EVENT_NAME\|GITHUB_REF'
           echo "${{github.event.action}}"
+          echo "${{github.event.client_payload.myvar}}"
