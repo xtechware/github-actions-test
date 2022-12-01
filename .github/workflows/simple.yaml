@@ -2,7 +2,7 @@
 name: Shell Commands
 on: [push, workflow_dispatch]
 jobs:
-  run-shell-command:
+  run-linux-commands:
     runs-on: ubuntu-latest
     steps:
       - name: echo a string
@@ -11,17 +11,22 @@ jobs:
         run: |
           node -v
           npm -v
+        # v16.18.1
+        # 8.19.2          
       - name: python command
         run: |
           import platform
           print(platform.processor())
         shell: python
+        # x86_64
       - name: Directory Bash
         run: pwd
         shell: bash
+        # /home/runner/work/github-actions-test/github-actions-test
       - name: LS Directory Bash
         run: ls -al
         shell: bash
+        # NOTE: This working directory is empty
   run-windows-commands:
     runs-on: windows-latest
     # this causes this to run in series to 
@@ -29,15 +34,18 @@ jobs:
     steps:
       - name: Directory Powershell
         run: Get-Location
-      - name: Directory Bash
-        run: pwd
-        shell: bash
+        # Path
+        # ----
+        # D:\a\github-actions-test\github-actions-test
       - name: Directory Windows Shell
         run: cd
         shell: cmd
+        # D:\a\github-actions-test\github-actions-test
       - name: Directory Bash
         run: pwd
         shell: bash
+        # /d/a/github-actions-test/github-actions-test
       - name: LS Directory Bash
         run: ls -al
         shell: bash
+        # NOTE: This working directory is empty
