@@ -1,3 +1,4 @@
+# note workflows run in parallel
 name: Shell Commands
 on: [push, workflow_dispatch]
 jobs:

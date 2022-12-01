@@ -17,4 +17,3 @@ jobs:
       - name: Delay
         run: sleep 60
         shell: bash
-
