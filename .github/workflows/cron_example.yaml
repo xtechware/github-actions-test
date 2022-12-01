@@ -1,0 +1,22 @@
+name: Cron Example
+on:
+  # run every 5 minutes
+  cron: 0/5 * * * *
+# 
+jobs:
+  cron-linux-commands:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Directory Bash
+        run: pwd
+        shell: bash
+        # /home/runner/work/github-actions-test/github-actions-test
+      - name: LS Directory Bash
+        run: ls -al
+        shell: bash
+        # NOTE: This working directory is empty
+      - name: Some GITHUB Environment Variables
+        shell: bash
+        run: |
+          printenv | grep 'GITHUB_EVENT_NAME\|GITHUB_REF'
+          echo "${{github.event.action}}"

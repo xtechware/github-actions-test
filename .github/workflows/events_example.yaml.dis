@@ -1,0 +1,93 @@
+# note workflows and jobs run in parallel
+# PRs also have checks from each workflow ... ?
+# PRs also include checks from last push/commit.
+name: Events Example
+# see https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows
+# for events and types
+# By default, a workflow only runs when a pull_request event's activity type is opened, synchronize, or reopened.
+# to override type use object definition instead of list so ...
+# on: [push, pull_request, workflow_dispatch] =>
+# on:
+#   push:
+#   pull_request:
+#     types: [opened, synchronize, reopened]
+#   workflow_dispatch:
+# to get pull_request or any other type use ${{github.event.action}}
+# enable more PR types and filter push events to main and events-test branches
+on:
+  push:
+    branches: [main, events-test, allowed]
+  pull_request:
+    types: [closed, assigned, opened, synchronize, reopened]
+  workflow_dispatch:
+# 
+jobs:
+  run-linux-commands:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Directory Bash
+        run: pwd
+        shell: bash
+        # /home/runner/work/github-actions-test/github-actions-test
+      - name: LS Directory Bash
+        run: ls -al
+        shell: bash
+        # NOTE: This working directory is empty
+        # Added on last run - see notes in Environment Variables and Misc below
+      - name: Some GITHUB Environment Variables
+        shell: bash
+        run: |
+          printenv | grep 'GITHUB_EVENT_NAME\|GITHUB_REF'
+          echo "${{github.event.action}}"
+      # now lets checkout our repo instead
+      # see https://github.com/actions/checkout#usage for options
+      - name: Checkout
+        uses: actions/checkout@v1
+        # ~same as shell_commands.yaml EXCEPT checking out new events-test working branch I created
+        # From https://github.com/xtechware/github-actions-test
+        #  * [new branch]      events-test -> origin/events-test
+        #  * [new branch]      main        -> origin/main
+        # git checkout --progress --force f5c9ff2c8e4f6802cbe2a9301ccbccaaa15ca1de
+        # Note: switching to 'f5c9ff2c8e4f6802cbe2a9301ccbccaaa15ca1de'.        
+        # ...
+      - name: Checkout Directory Bash
+        run: pwd
+        shell: bash
+        # /home/runner/work/github-actions-test/github-actions-test
+      - name: LS Checkout Directory Bash
+        run: ls -al
+        shell: bash
+        # total 20
+        # drwxr-xr-x 4 runner docker 4096 Dec  1 16:29 .
+        # drwxr-xr-x 3 runner docker 4096 Dec  1 16:29 ..
+        # drwxr-xr-x 8 runner docker 4096 Dec  1 16:29 .git
+        # drwxr-xr-x 3 runner docker 4096 Dec  1 16:29 .github
+        # -rw-r--r-- 1 runner docker   21 Dec  1 16:29 README.md
+      - name: Environment Variables and Misc
+        shell: bash
+        run: |
+          printenv | grep 'GITHUB'
+          echo "${{github.token}}"
+          git remote -vv
+          git status
+        # pretty much the same as shell_commands on push - all branches
+        # GITHUB_EVENT_NAME=push
+        # GITHUB_REF=refs/heads/events-test
+        # on PR create
+        # GITHUB_EVENT_NAME=pull_request
+        # GITHUB_REF=refs/pull/1/merge
+        # on PR merge
+        # GITHUB_EVENT_NAME=push
+        # GITHUB_REF=refs/heads/main
+        # on PR reopen
+        # GITHUB_EVENT_NAME=pull_request
+        # GITHUB_REF=refs/pull/2/merge
+        # ${{github.event.action}} = reopened
+        # on PR close fails checkout step above - because I deleted the source branch too quickly, otherwise
+        # GITHUB_EVENT_NAME=pull_request
+        # GITHUB_REF=refs/pull/4/merge
+        # ${{github.event.action}} = closed
+        # on update of source branch of PR
+        # GITHUB_EVENT_NAME=pull_request
+        # GITHUB_REF=refs/pull/2/merge
+        # ${{github.event.action}} = synchronize
