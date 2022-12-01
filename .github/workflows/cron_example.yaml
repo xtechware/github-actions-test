@@ -1,3 +1,4 @@
+# NOTE: Scheduled workflows run on the latest commit on the default or base branch.
 name: Cron Example
 on:
   # run every 5 minutes
