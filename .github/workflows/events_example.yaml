@@ -1,0 +1,48 @@
+# note workflows and jobs run in parallel
+name: Events Example
+on: [push, pull_request, workflow_dispatch]
+jobs:
+  run-linux-commands:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Directory Bash
+        run: pwd
+        shell: bash
+        # /home/runner/work/github-actions-test/github-actions-test
+      - name: LS Directory Bash
+        run: ls -al
+        shell: bash
+        # NOTE: This working directory is empty
+      # now lets checkout our repo instead
+      # see https://github.com/actions/checkout#usage for options
+      - name: Checkout
+        uses: actions/checkout@v1
+        # ~same as shell_commands.yaml EXCEPT checking out new events-test working branch I created
+        # From https://github.com/xtechware/github-actions-test
+        #  * [new branch]      events-test -> origin/events-test
+        #  * [new branch]      main        -> origin/main
+        # git checkout --progress --force f5c9ff2c8e4f6802cbe2a9301ccbccaaa15ca1de
+        # Note: switching to 'f5c9ff2c8e4f6802cbe2a9301ccbccaaa15ca1de'.        
+        # ...
+      - name: Checkout Directory Bash
+        run: pwd
+        shell: bash
+        # /home/runner/work/github-actions-test/github-actions-test
+      - name: LS Checkout Directory Bash
+        run: ls -al
+        shell: bash
+        # total 20
+        # drwxr-xr-x 4 runner docker 4096 Dec  1 16:29 .
+        # drwxr-xr-x 3 runner docker 4096 Dec  1 16:29 ..
+        # drwxr-xr-x 8 runner docker 4096 Dec  1 16:29 .git
+        # drwxr-xr-x 3 runner docker 4096 Dec  1 16:29 .github
+        # -rw-r--r-- 1 runner docker   21 Dec  1 16:29 README.md
+      - name: Environment Variables and Misc
+        shell: bash
+        run: |
+          printenv | grep 'GITHUB'
+          echo "${{github.token}}"
+          git remote -vv
+          git status
+        # pretty much the same as shell_commands on push
+        # GITHUB_EVENT_NAME=push
