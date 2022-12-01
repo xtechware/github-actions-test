@@ -30,7 +30,7 @@ jobs:
   run-windows-commands:
     runs-on: windows-latest
     # this causes this to run in series to 
-    needs: [run-linux-command]
+    needs: [run-linux-commands]
     steps:
       - name: Directory Powershell
         run: Get-Location
