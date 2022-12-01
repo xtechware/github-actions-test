@@ -19,9 +19,6 @@ jobs:
       - name: Directory Bash
         run: pwd
         shell: bash
-      - name: Delay
-        run: sleep 60
-        shell: bash
   run-windows-commands:
     runs-on: windows-latest
     # this causes this to run in series to 
@@ -35,6 +32,6 @@ jobs:
       - name: Directory Windows Shell
         run: cd
         shell: cmd
-      - name: Delay
-        run: sleep 60
+      - name: Directory Bash
+        run: pwd
         shell: bash
