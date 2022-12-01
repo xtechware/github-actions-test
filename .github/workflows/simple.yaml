@@ -27,6 +27,15 @@ jobs:
         run: ls -al
         shell: bash
         # NOTE: This working directory is empty
+      # now lets checkout our repo instead
+      - name: Checkout
+        uses: actions/checkout@v1
+      - name: Checkout Directory Bash
+        run: pwd
+        shell: bash
+      - name: LS Checkout Directory Bash
+        run: ls -al
+        shell: bash
   run-windows-commands:
     runs-on: windows-latest
     # this causes this to run in series to 
@@ -49,3 +58,12 @@ jobs:
         run: ls -al
         shell: bash
         # NOTE: This working directory is empty
+      # now lets checkout our repo instead
+      - name: Checkout
+        uses: actions/checkout@v1
+      - name: Checkout Directory Bash
+        run: pwd
+        shell: bash
+      - name: LS Checkout Directory Bash
+        run: ls -al
+        shell: bash
