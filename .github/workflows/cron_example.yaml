@@ -1,7 +1,8 @@
 name: Cron Example
 on:
   # run every 5 minutes
-  cron: 0/5 * * * *
+  schedule:
+    cron: "0/5 * * * *"
 # 
 jobs:
   cron-linux-commands:
