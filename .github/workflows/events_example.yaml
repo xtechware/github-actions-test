@@ -12,6 +12,7 @@ name: Events Example
 #   pull_request:
 #     types: [opened, synchronize, reopened]
 #   workflow_dispatch:
+# to get pull_request or any other type use ${{github.event.action}}
 # enable more PR types and filter push events to main and events-test branches
 on:
   push:
