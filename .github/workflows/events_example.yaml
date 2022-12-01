@@ -37,6 +37,7 @@ jobs:
         shell: bash
         run: |
           printenv | grep 'GITHUB_EVENT_NAME\|GITHUB_REF'
+          echo "${{ githib.event.action }}"
       # now lets checkout our repo instead
       # see https://github.com/actions/checkout#usage for options
       - name: Checkout
