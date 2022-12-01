@@ -14,3 +14,7 @@ jobs:
         # use the output of the previous step
       - name: Log Greeting Time
         run: echo "${{steps.greet.outputs.time}}"
+      - name: Delay
+        run: sleep 60
+        shell: bash
+

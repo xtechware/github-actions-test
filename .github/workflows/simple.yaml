@@ -15,6 +15,9 @@ jobs:
           import platform
           print(platform.processor())
         shell: python
+      - name: Delay
+        run: sleep 60
+        shell: bash
   run-windows-commands:
     runs-on: windows-latest
     # this causes this to run in series to 
@@ -24,4 +27,7 @@ jobs:
         run: Get-Location
       - name: Directory Bash
         run: pwd
+        shell: bash
+      - name: Delay
+        run: sleep 60
         shell: bash
