@@ -3,7 +3,9 @@ name: Cron Example
 on:
   # run every 5 minutes
   schedule:
-    - cron: "0/5 * * * *"
+    - cron: "*/5 * * * *"
+  # enables ability to use POST command to trigger workflow
+  repository_dispatch:
 # 
 jobs:
   cron-linux-commands:
