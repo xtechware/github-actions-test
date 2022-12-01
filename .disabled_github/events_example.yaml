@@ -13,7 +13,12 @@ name: Events Example
 #     types: [opened, synchronize, reopened]
 #   workflow_dispatch:
 # to get pull_request or any other type use ${{github.event.action}}
-# enable more PR types and filter push events to main and events-test branches
+# enable more PR types and filter push events to main, events-test and allowed branches
+# you can also filter PRs by target branch or filter by wildcards
+# NOTE: wildcards DO NOT match /
+# there is also a branches-ignore option which is mutually exclusive with branches
+# you can also use '!' to negate a branch-ignore or branch entry
+# similarly you can use a tags or paths options as well
 on:
   push:
     branches: [main, events-test, allowed]
