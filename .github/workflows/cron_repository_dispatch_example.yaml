@@ -4,7 +4,7 @@ on:
   # run every 5 minutes
   schedule:
     - cron: "*/5 * * * *"
-  # enables ability to use POST command to trigger workflow
+  # repository_dispatch enables ability to use POST command to trigger workflow
   repository_dispatch:
     # create your own event types
     types: [custom-build]
@@ -14,8 +14,13 @@ on:
     #   -H "Accept: application/vnd.github+json" \
     #   -H "Authorization: Bearer $GITHUB_TOKEN" \
     #   https://api.github.com/repos/xtechware/github-actions-test/dispatches \
-    #   -d '{"event_type":"custom-build","some_data_whatever":{"unit":false,"integration":true}}'
+    #   -d '{"event_type":"custom-build", "client_payload":{"myvar":"myval"}}'
     # 
+    # result
+    # GITHUB_EVENT_NAME=repository_dispatch
+    # GITHUB_REF_NAME=main
+    # ${{github.event.action}} = custom-build
+    # NOTE: ^this becomes the run title
 jobs:
   cron-linux-commands:
     runs-on: ubuntu-latest
