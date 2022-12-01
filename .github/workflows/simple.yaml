@@ -19,6 +19,9 @@ jobs:
       - name: Directory Bash
         run: pwd
         shell: bash
+      - name: LS Directory Bash
+        run: ls -al
+        shell: bash
   run-windows-commands:
     runs-on: windows-latest
     # this causes this to run in series to 
@@ -34,4 +37,7 @@ jobs:
         shell: cmd
       - name: Directory Bash
         run: pwd
+        shell: bash
+      - name: LS Directory Bash
+        run: ls -al
         shell: bash
