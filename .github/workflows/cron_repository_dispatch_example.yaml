@@ -1,12 +1,21 @@
 # NOTE: Scheduled workflows run on the latest commit on the default or base branch.
-name: Cron Example
+name: Cron and Repository Dispatch Example
 on:
   # run every 5 minutes
   schedule:
     - cron: "*/5 * * * *"
   # enables ability to use POST command to trigger workflow
   repository_dispatch:
-# 
+    # create your own event types
+    types: [custom-build]
+    # to fire event
+    # curl \
+    #   -X POST \
+    #   -H "Accept: application/vnd.github+json" \
+    #   -H "Authorization: Bearer $GITHUB_TOKEN" \
+    #   https://api.github.com/repos/xtechware/github-actions-test/dispatches \
+    #   -d '{"event_type":"custom-build","some_data_whatever":{"unit":false,"integration":true}}'
+    # 
 jobs:
   cron-linux-commands:
     runs-on: ubuntu-latest
