@@ -32,6 +32,11 @@ jobs:
         run: ls -al
         shell: bash
         # NOTE: This working directory is empty
+        # Added on last run - see notes in Environment Variables and Misc below
+      - name: Some GITHUB Environment Variables
+        shell: bash
+        run: |
+          printenv | grep 'GITHUB_EVENT_NAME\|GITHUB_REF'
       # now lets checkout our repo instead
       # see https://github.com/actions/checkout#usage for options
       - name: Checkout
@@ -75,8 +80,7 @@ jobs:
         # on PR reopen
         # GITHUB_EVENT_NAME=pull_request
         # GITHUB_REF=refs/pull/2/merge
-        # on PR close fails checkout step above - this is because I deleted the branch, otherwise
-        # 
+        # on PR close fails checkout step above - likely because the PR ref no longer exists so trying above
         # on update of source branch of PR
         # GITHUB_EVENT_NAME=pull_request
         # GITHUB_REF=refs/pull/2/merge
