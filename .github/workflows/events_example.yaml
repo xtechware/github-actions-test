@@ -17,6 +17,13 @@ jobs:
       # see https://github.com/actions/checkout#usage for options
       - name: Checkout
         uses: actions/checkout@v1
+        # ~same as shell_commands.yaml EXCEPT checking out new events-test working branch I created
+        # From https://github.com/xtechware/github-actions-test
+        #  * [new branch]      events-test -> origin/events-test
+        #  * [new branch]      main        -> origin/main
+        # git checkout --progress --force f5c9ff2c8e4f6802cbe2a9301ccbccaaa15ca1de
+        # Note: switching to 'f5c9ff2c8e4f6802cbe2a9301ccbccaaa15ca1de'.        
+        # ...
       - name: Checkout Directory Bash
         run: pwd
         shell: bash
@@ -37,42 +44,5 @@ jobs:
           echo "${{github.token}}"
           git remote -vv
           git status
-  run-windows-commands:
-    runs-on: windows-latest
-    # this causes this to run in series to 
-    needs: [run-linux-commands]
-    steps:
-      - name: Directory Bash
-        run: pwd
-        shell: bash
-        # /d/a/github-actions-test/github-actions-test
-      - name: LS Directory Bash
-        run: ls -al
-        shell: bash
-        # NOTE: This working directory is empty
-      # now lets checkout our repo instead
-      # see https://github.com/actions/checkout#usage for options
-      - name: Checkout
-        uses: actions/checkout@v1
-        # same as above
-      - name: Checkout Directory Bash
-        run: pwd
-        shell: bash
-        # /d/a/github-actions-test/github-actions-test
-      - name: LS Checkout Directory Bash
-        run: ls -al
-        shell: bash
-        # total 5
-        # drwxr-xr-x 1 runneradmin 197121  0 Dec  1 16:30 .
-        # drwxr-xr-x 1 runneradmin 197121  0 Dec  1 16:30 ..
-        # drwxr-xr-x 1 runneradmin 197121  0 Dec  1 16:30 .git
-        # drwxr-xr-x 1 runneradmin 197121  0 Dec  1 16:30 .github
-        # -rw-r--r-- 1 runneradmin 197121 21 Dec  1 16:30 README.md
-      - name: Environment Variables and Misc
-        shell: bash
-        run: |
-          printenv | grep 'GITHUB'
-          echo "${{github.token}}"
-          git remote -vv
-          git status
-        # similar to above but with Windows pathing - why?
+        # pretty much the same as shell_commands on push
+        # GITHUB_EVENT_NAME=push
