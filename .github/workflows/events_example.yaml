@@ -15,7 +15,7 @@ name: Events Example
 # enable more PR types and filter push events to main and events-test branches
 on:
   push:
-    branches: [main, events-test]
+    branches: [main, events-test, allowed]
   pull_request:
     types: [closed, assigned, opened, synchronize, reopened]
   workflow_dispatch:
