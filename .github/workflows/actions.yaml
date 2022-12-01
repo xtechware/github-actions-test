@@ -14,5 +14,7 @@ jobs:
         # use the output of the previous step
       - name: Log Greeting Time
         run: echo "${{steps.greet.outputs.time}}"
+        # 16:03:37 GMT+0000 (Coordinated Universal Time)
       - name: Log All Outputs
         run: echo "${{steps.greet.outputs}}"
+        # Object
