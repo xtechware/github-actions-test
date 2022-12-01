@@ -89,7 +89,7 @@ jobs:
       - name: Environment Variables and Misc
         shell: bash
         run: |
-          printenv | grep 'GITHUB\|STEP`
+          printenv | grep 'GITHUB\|STEP'
           echo "${{github.token}}"
           git remote -vv
           git status
@@ -135,7 +135,7 @@ jobs:
       - name: Environment Variables and Misc
         shell: bash
         run: |
-          printenv | grep 'GITHUB\|STEP`
+          printenv | grep 'GITHUB\|STEP'
           echo "${{github.token}}"
           git remote -vv
           git status
