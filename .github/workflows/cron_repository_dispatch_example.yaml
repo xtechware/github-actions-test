@@ -39,5 +39,7 @@ jobs:
           printenv | grep 'GITHUB_EVENT_NAME\|GITHUB_REF'
           echo "${{github.event.action}}"
           echo "${{github.event.client_payload.myvar}}"
+        # on schedule and repository_dispatch:
         # custom-build
+        # on repository_dispatch only:
         # myval
