@@ -32,6 +32,9 @@ jobs:
       - name: Directory Bash
         run: pwd
         shell: bash
+      - name: Directory Windows Shell
+        run: cd
+        shell: cmd
       - name: Delay
         run: sleep 60
         shell: bash
