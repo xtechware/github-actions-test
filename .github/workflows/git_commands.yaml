@@ -1,0 +1,9 @@
+name: Git Commands
+on: [push, workflow_dispatch]
+jobs:
+  run-linux-commands:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create Origin Remote
+        run: git remote add origin "https://$GITHUB_ACTOR:${{secrets.GITHUB_TOKEN}}@github.com/$GITHUB_REPOSITORY.git"
+    
