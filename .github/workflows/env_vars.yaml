@@ -4,6 +4,9 @@ name: Environment Variables
 on: [push, workflow_dispatch, pull_request]
 env:
   WF_ENV: Available to all jobs
+  # encrypted env var/Secret
+  # https://docs.github.com/actions/automating-your-workflow-with-github-actions/creating-and-using-encrypted-secrets
+  SECRET_ENV: ${{secrets.SECRET_ENV}}
 jobs:
   log-env:
     runs-on: ubuntu-latest
@@ -18,8 +21,6 @@ jobs:
           echo "JOB_ENV: ${JOB_ENV}"
           echo "STEP_ENV: ${STEP_ENV}"
           echo "SECRET_ENV: ${SECRET_ENV}"
-        # encrypted env var/Secret
-        # https://docs.github.com/actions/automating-your-workflow-with-github-actions/creating-and-using-encrypted-secrets
         # WF_ENV: Available to all jobs
         # JOB_ENV: Available to all steps in this job (log-env)
         # STEP_ENV: Available only in this step
