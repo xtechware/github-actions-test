@@ -6,15 +6,275 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Dump GitHub context
+        # id allows you to access step details from another step
         id: github_context_step
+        # {
+        #   "token": "***",
+        #   "job": "dump_contexts_to_log",
+        #   "ref": "refs/heads/main",
+        #   "sha": "92e9a14b9322dc13fa1376dff6f4f27760b5f4ec",
+        #   "repository": "xtechware/github-actions-test",
+        #   "repository_owner": "xtechware",
+        #   "repository_owner_id": "36745381",
+        #   "repositoryUrl": "git://github.com/xtechware/github-actions-test.git",
+        #   "run_id": "3660752314",
+        #   "run_number": "1",
+        #   "retention_days": "90",
+        #   "run_attempt": "1",
+        #   "artifact_cache_size_limit": "10",
+        #   "repository_visibility": "public",
+        #   "repository_id": "566986478",
+        #   "actor_id": "32502115",
+        #   "actor": "jfgudk",
+        #   "triggering_actor": "jfgudk",
+        #   "workflow": "Context testing",
+        #   "head_ref": "",
+        #   "base_ref": "",
+        #   "event_name": "push",
+        #   "event": {
+        #     "after": "92e9a14b9322dc13fa1376dff6f4f27760b5f4ec",
+        #     "base_ref": null,
+        #     "before": "cffff4ebe3507b11152c48bd9b6e9ad7c1c67633",
+        #     "commits": [
+        #       {
+        #         "author": {
+        #           "email": "j.gudknecht@elsevier.com",
+        #           "name": "jfgudk",
+        #           "username": "jfgudk"
+        #         },
+        #         "committer": {
+        #           "email": "j.gudknecht@elsevier.com",
+        #           "name": "jfgudk",
+        #           "username": "jfgudk"
+        #         },
+        #         "distinct": true,
+        #         "id": "92e9a14b9322dc13fa1376dff6f4f27760b5f4ec",
+        #         "message": "Switch to contexts.yaml",
+        #         "timestamp": "2022-12-09T16:04:46-05:00",
+        #         "tree_id": "1f1df2109bc91e6ab3d707e8186b032643aa275f",
+        #         "url": "https://github.com/xtechware/github-actions-test/commit/92e9a14b9322dc13fa1376dff6f4f27760b5f4ec"
+        #       }
+        #     ],
+        #     "compare": "https://github.com/xtechware/github-actions-test/compare/cffff4ebe350...92e9a14b9322",
+        #     "created": false,
+        #     "deleted": false,
+        #     "forced": false,
+        #     "head_commit": {
+        #       "author": {
+        #         "email": "j.gudknecht@elsevier.com",
+        #         "name": "jfgudk",
+        #         "username": "jfgudk"
+        #       },
+        #       "committer": {
+        #         "email": "j.gudknecht@elsevier.com",
+        #         "name": "jfgudk",
+        #         "username": "jfgudk"
+        #       },
+        #       "distinct": true,
+        #       "id": "92e9a14b9322dc13fa1376dff6f4f27760b5f4ec",
+        #       "message": "Switch to contexts.yaml",
+        #       "timestamp": "2022-12-09T16:04:46-05:00",
+        #       "tree_id": "1f1df2109bc91e6ab3d707e8186b032643aa275f",
+        #       "url": "https://github.com/xtechware/github-actions-test/commit/92e9a14b9322dc13fa1376dff6f4f27760b5f4ec"
+        #     },
+        #     "organization": {
+        #       "avatar_url": "https://avatars.githubusercontent.com/u/36745381?v=4",
+        #       "description": "XTechWare Public GitHub Organization",
+        #       "events_url": "https://api.github.com/orgs/xtechware/events",
+        #       "hooks_url": "https://api.github.com/orgs/xtechware/hooks",
+        #       "id": 36745381,
+        #       "issues_url": "https://api.github.com/orgs/xtechware/issues",
+        #       "login": "xtechware",
+        #       "members_url": "https://api.github.com/orgs/xtechware/members{/member}",
+        #       "node_id": "MDEyOk9yZ2FuaXphdGlvbjM2NzQ1Mzgx",
+        #       "public_members_url": "https://api.github.com/orgs/xtechware/public_members{/member}",
+        #       "repos_url": "https://api.github.com/orgs/xtechware/repos",
+        #       "url": "https://api.github.com/orgs/xtechware"
+        #     },
+        #     "pusher": {
+        #       "email": "j.gudknecht@elsevier.com",
+        #       "name": "jfgudk"
+        #     },
+        #     "ref": "refs/heads/main",
+        #     "repository": {
+        #       "allow_forking": true,
+        #       "archive_url": "https://api.github.com/repos/xtechware/github-actions-test/{archive_format}{/ref}",
+        #       "archived": false,
+        #       "assignees_url": "https://api.github.com/repos/xtechware/github-actions-test/assignees{/user}",
+        #       "blobs_url": "https://api.github.com/repos/xtechware/github-actions-test/git/blobs{/sha}",
+        #       "branches_url": "https://api.github.com/repos/xtechware/github-actions-test/branches{/branch}",
+        #       "clone_url": "https://github.com/xtechware/github-actions-test.git",
+        #       "collaborators_url": "https://api.github.com/repos/xtechware/github-actions-test/collaborators{/collaborator}",
+        #       "comments_url": "https://api.github.com/repos/xtechware/github-actions-test/comments{/number}",
+        #       "commits_url": "https://api.github.com/repos/xtechware/github-actions-test/commits{/sha}",
+        #       "compare_url": "https://api.github.com/repos/xtechware/github-actions-test/compare/{base}...{head}",
+        #       "contents_url": "https://api.github.com/repos/xtechware/github-actions-test/contents/{+path}",
+        #       "contributors_url": "https://api.github.com/repos/xtechware/github-actions-test/contributors",
+        #       "created_at": 1668631376,
+        #       "default_branch": "main",
+        #       "deployments_url": "https://api.github.com/repos/xtechware/github-actions-test/deployments",
+        #       "description": null,
+        #       "disabled": false,
+        #       "downloads_url": "https://api.github.com/repos/xtechware/github-actions-test/downloads",
+        #       "events_url": "https://api.github.com/repos/xtechware/github-actions-test/events",
+        #       "fork": false,
+        #       "forks": 0,
+        #       "forks_count": 0,
+        #       "forks_url": "https://api.github.com/repos/xtechware/github-actions-test/forks",
+        #       "full_name": "xtechware/github-actions-test",
+        #       "git_commits_url": "https://api.github.com/repos/xtechware/github-actions-test/git/commits{/sha}",
+        #       "git_refs_url": "https://api.github.com/repos/xtechware/github-actions-test/git/refs{/sha}",
+        #       "git_tags_url": "https://api.github.com/repos/xtechware/github-actions-test/git/tags{/sha}",
+        #       "git_url": "git://github.com/xtechware/github-actions-test.git",
+        #       "has_discussions": false,
+        #       "has_downloads": true,
+        #       "has_issues": true,
+        #       "has_pages": false,
+        #       "has_projects": true,
+        #       "has_wiki": true,
+        #       "homepage": null,
+        #       "hooks_url": "https://api.github.com/repos/xtechware/github-actions-test/hooks",
+        #       "html_url": "https://github.com/xtechware/github-actions-test",
+        #       "id": 566986478,
+        #       "is_template": false,
+        #       "issue_comment_url": "https://api.github.com/repos/xtechware/github-actions-test/issues/comments{/number}",
+        #       "issue_events_url": "https://api.github.com/repos/xtechware/github-actions-test/issues/events{/number}",
+        #       "issues_url": "https://api.github.com/repos/xtechware/github-actions-test/issues{/number}",
+        #       "keys_url": "https://api.github.com/repos/xtechware/github-actions-test/keys{/key_id}",
+        #       "labels_url": "https://api.github.com/repos/xtechware/github-actions-test/labels{/name}",
+        #       "language": null,
+        #       "languages_url": "https://api.github.com/repos/xtechware/github-actions-test/languages",
+        #       "license": null,
+        #       "master_branch": "main",
+        #       "merges_url": "https://api.github.com/repos/xtechware/github-actions-test/merges",
+        #       "milestones_url": "https://api.github.com/repos/xtechware/github-actions-test/milestones{/number}",
+        #       "mirror_url": null,
+        #       "name": "github-actions-test",
+        #       "node_id": "R_kgDOIcuG7g",
+        #       "notifications_url": "https://api.github.com/repos/xtechware/github-actions-test/notifications{?since,all,participating}",
+        #       "open_issues": 0,
+        #       "open_issues_count": 0,
+        #       "organization": "xtechware",
+        #       "owner": {
+        #         "avatar_url": "https://avatars.githubusercontent.com/u/36745381?v=4",
+        #         "email": "github@xtechware.com",
+        #         "events_url": "https://api.github.com/users/xtechware/events{/privacy}",
+        #         "followers_url": "https://api.github.com/users/xtechware/followers",
+        #         "following_url": "https://api.github.com/users/xtechware/following{/other_user}",
+        #         "gists_url": "https://api.github.com/users/xtechware/gists{/gist_id}",
+        #         "gravatar_id": "",
+        #         "html_url": "https://github.com/xtechware",
+        #         "id": 36745381,
+        #         "login": "xtechware",
+        #         "name": "xtechware",
+        #         "node_id": "MDEyOk9yZ2FuaXphdGlvbjM2NzQ1Mzgx",
+        #         "organizations_url": "https://api.github.com/users/xtechware/orgs",
+        #         "received_events_url": "https://api.github.com/users/xtechware/received_events",
+        #         "repos_url": "https://api.github.com/users/xtechware/repos",
+        #         "site_admin": false,
+        #         "starred_url": "https://api.github.com/users/xtechware/starred{/owner}{/repo}",
+        #         "subscriptions_url": "https://api.github.com/users/xtechware/subscriptions",
+        #         "type": "Organization",
+        #         "url": "https://api.github.com/users/xtechware"
+        #       },
+        #       "private": false,
+        #       "pulls_url": "https://api.github.com/repos/xtechware/github-actions-test/pulls{/number}",
+        #       "pushed_at": 1670619888,
+        #       "releases_url": "https://api.github.com/repos/xtechware/github-actions-test/releases{/id}",
+        #       "size": 34,
+        #       "ssh_url": "git@github.com:xtechware/github-actions-test.git",
+        #       "stargazers": 0,
+        #       "stargazers_count": 0,
+        #       "stargazers_url": "https://api.github.com/repos/xtechware/github-actions-test/stargazers",
+        #       "statuses_url": "https://api.github.com/repos/xtechware/github-actions-test/statuses/{sha}",
+        #       "subscribers_url": "https://api.github.com/repos/xtechware/github-actions-test/subscribers",
+        #       "subscription_url": "https://api.github.com/repos/xtechware/github-actions-test/subscription",
+        #       "svn_url": "https://github.com/xtechware/github-actions-test",
+        #       "tags_url": "https://api.github.com/repos/xtechware/github-actions-test/tags",
+        #       "teams_url": "https://api.github.com/repos/xtechware/github-actions-test/teams",
+        #       "topics": [],
+        #       "trees_url": "https://api.github.com/repos/xtechware/github-actions-test/git/trees{/sha}",
+        #       "updated_at": "2022-11-16T20:42:56Z",
+        #       "url": "https://github.com/xtechware/github-actions-test",
+        #       "visibility": "public",
+        #       "watchers": 0,
+        #       "watchers_count": 0,
+        #       "web_commit_signoff_required": false
+        #     },
+        #     "sender": {
+        #       "avatar_url": "https://avatars.githubusercontent.com/u/32502115?v=4",
+        #       "events_url": "https://api.github.com/users/jfgudk/events{/privacy}",
+        #       "followers_url": "https://api.github.com/users/jfgudk/followers",
+        #       "following_url": "https://api.github.com/users/jfgudk/following{/other_user}",
+        #       "gists_url": "https://api.github.com/users/jfgudk/gists{/gist_id}",
+        #       "gravatar_id": "",
+        #       "html_url": "https://github.com/jfgudk",
+        #       "id": 32502115,
+        #       "login": "jfgudk",
+        #       "node_id": "MDQ6VXNlcjMyNTAyMTE1",
+        #       "organizations_url": "https://api.github.com/users/jfgudk/orgs",
+        #       "received_events_url": "https://api.github.com/users/jfgudk/received_events",
+        #       "repos_url": "https://api.github.com/users/jfgudk/repos",
+        #       "site_admin": false,
+        #       "starred_url": "https://api.github.com/users/jfgudk/starred{/owner}{/repo}",
+        #       "subscriptions_url": "https://api.github.com/users/jfgudk/subscriptions",
+        #       "type": "User",
+        #       "url": "https://api.github.com/users/jfgudk"
+        #     }
+        #   },
+        #   "server_url": "https://github.com",
+        #   "api_url": "https://api.github.com",
+        #   "graphql_url": "https://api.github.com/graphql",
+        #   "ref_name": "main",
+        #   "ref_protected": false,
+        #   "ref_type": "branch",
+        #   "secret_source": "Actions",
+        #   "workflow_ref": "xtechware/github-actions-test/.github/workflows/contexts.yaml@refs/heads/main",
+        #   "workflow_sha": "92e9a14b9322dc13fa1376dff6f4f27760b5f4ec",
+        #   "workspace": "/home/runner/work/github-actions-test/github-actions-test",
+        #   "action": "github_context_step",
+        #   "event_path": "/home/runner/work/_temp/_github_workflow/event.json",
+        #   "action_repository": "",
+        #   "action_ref": "",
+        #   "path": "/home/runner/work/_temp/_runner_file_commands/add_path_c8ad8850-63b5-4177-b1a7-89bda102b130",
+        #   "env": "/home/runner/work/_temp/_runner_file_commands/set_env_c8ad8850-63b5-4177-b1a7-89bda102b130",
+        #   "step_summary": "/home/runner/work/_temp/_runner_file_commands/step_summary_c8ad8850-63b5-4177-b1a7-89bda102b130",
+        #   "state": "/home/runner/work/_temp/_runner_file_commands/save_state_c8ad8850-63b5-4177-b1a7-89bda102b130",
+        #   "output": "/home/runner/work/_temp/_runner_file_commands/set_output_c8ad8850-63b5-4177-b1a7-89bda102b130"
+        # }        
         run: echo '${{ toJSON(github) }}'
       - name: Dump job context
         run: echo '${{ toJSON(job) }}'
+        # {
+        #   "status": "success"
+        # }
       - name: Dump steps context
         run: echo '${{ toJSON(steps) }}'
+        # {
+        #   "github_context_step": {
+        #     "outputs": {},
+        #     "outcome": "success",
+        #     "conclusion": "success"
+        #   }
+        # }        
       - name: Dump runner context
         run: echo '${{ toJSON(runner) }}'
+        # {
+        #   "os": "Linux",
+        #   "arch": "X64",
+        #   "name": "GitHub Actions 2",
+        #   "tool_cache": "/opt/hostedtoolcache",
+        #   "temp": "/home/runner/work/_temp",
+        #   "workspace": "/home/runner/work/github-actions-test"
+        # }        
       - name: Dump strategy context
         run: echo '${{ toJSON(strategy) }}'
+        # {
+        #   "fail-fast": true,
+        #   "job-index": 0,
+        #   "job-total": 1,
+        #   "max-parallel": 1
+        # }       
       - name: Dump matrix context
         run: echo '${{ toJSON(matrix) }}'
+        # null
