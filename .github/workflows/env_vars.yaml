@@ -16,15 +16,69 @@ jobs:
           echo "WF_ENV: ${WF_ENV}"
           echo "JOB_ENV: ${JOB_ENV}"
           echo "STEP_ENV: ${STEP_ENV}"  
+        # WF_ENV: Available to all jobs
+        # JOB_ENV: Available to all steps in this job (log-env)
+        # STEP_ENV: Available only in this step
       - name: Log ENV2 Variables
         run: |
           echo "WF_ENV: ${WF_ENV}"
           echo "JOB_ENV: ${JOB_ENV}"
           echo "STEP_ENV: ${STEP_ENV}"  
+        # WF_ENV: Available to all jobs
+        # JOB_ENV: Available to all steps in this job (log-env)
+        # STEP_ENV: 
   log-default-env:
     runs-on: ubuntu-latest
     steps:
       - name: Default ENV Variables
         run: |
           printenv | grep 'GITHUB\|HOME\|_ENV'
-       
+        # GITHUB_WORKSPACE=/home/runner/work/github-actions-test/github-actions-test
+        # JAVA_HOME_11_X64=/usr/lib/jvm/temurin-11-jdk-amd64
+        # GITHUB_PATH=/home/runner/work/_temp/_runner_file_commands/add_path_fa810e6f-a7e5-4224-8542-6109adfee902
+        # GITHUB_ACTION=__run
+        # JAVA_HOME=/usr/lib/jvm/temurin-11-jdk-amd64
+        # GITHUB_RUN_NUMBER=2
+        # GRADLE_HOME=/usr/share/gradle-7.6
+        # XDG_CONFIG_HOME=/home/runner/.config
+        # ANT_HOME=/usr/share/ant
+        # JAVA_HOME_8_X64=/usr/lib/jvm/temurin-8-jdk-amd64
+        # GITHUB_TRIGGERING_ACTOR=jfgudk
+        # GITHUB_REF_TYPE=branch
+        # WF_ENV=Available to all jobs
+        # HOMEBREW_CLEANUP_PERIODIC_FULL_DAYS=3650
+        # GITHUB_ACTIONS=true
+        # ANDROID_NDK_LATEST_HOME=/usr/local/lib/android/sdk/ndk/25.1.8937393
+        # GITHUB_SHA=510d2926918369743f3554ace5191a5296b087a6
+        # GITHUB_REF=refs/heads/main
+        # GITHUB_REF_PROTECTED=false
+        # HOME=/home/runner
+        # GITHUB_API_URL=https://api.github.com
+        # GITHUB_STATE=/home/runner/work/_temp/_runner_file_commands/save_state_fa810e6f-a7e5-4224-8542-6109adfee902
+        # GITHUB_ENV=/home/runner/work/_temp/_runner_file_commands/set_env_fa810e6f-a7e5-4224-8542-6109adfee902
+        # GITHUB_EVENT_PATH=/home/runner/work/_temp/_github_workflow/event.json
+        # GITHUB_EVENT_NAME=push
+        # GITHUB_RUN_ID=3660191310
+        # JAVA_HOME_17_X64=/usr/lib/jvm/temurin-17-jdk-amd64
+        # ANDROID_NDK_HOME=/usr/local/lib/android/sdk/ndk/25.1.8937393
+        # GITHUB_STEP_SUMMARY=/home/runner/work/_temp/_runner_file_commands/step_summary_fa810e6f-a7e5-4224-8542-6109adfee902
+        # HOMEBREW_NO_AUTO_UPDATE=1
+        # GITHUB_ACTOR=jfgudk
+        # GITHUB_RUN_ATTEMPT=1
+        # ANDROID_HOME=/usr/local/lib/android/sdk
+        # GITHUB_GRAPHQL_URL=https://api.github.com/graphql
+        # GITHUB_SERVER_URL=https://github.com
+        # PIPX_HOME=/opt/pipx
+        # GITHUB_REF_NAME=main
+        # GITHUB_JOB=log-default-env
+        # GITHUB_REPOSITORY=xtechware/github-actions-test
+        # GITHUB_RETENTION_DAYS=90
+        # LEIN_HOME=/usr/local/lib/lein
+        # GITHUB_ACTION_REPOSITORY=
+        # GITHUB_BASE_REF=
+        # GITHUB_REPOSITORY_OWNER=xtechware
+        # GITHUB_HEAD_REF=
+        # GITHUB_ACTION_REF=
+        # GITHUB_WORKFLOW=Environment Variables
+        # GITHUB_OUTPUT=/home/runner/work/_temp/_runner_file_commands/set_output_fa810e6f-a7e5-4224-8542-6109adfee902
+      
