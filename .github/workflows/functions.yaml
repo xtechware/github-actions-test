@@ -1,0 +1,15 @@
+# some contexts and dumping
+name: Functions testing
+on: [push, workflow_dispatch]
+jobs:
+  Some Functions:
+    runs-on: ubuntu-latest
+    steps:
+      - name: String Functions
+        run: |
+          echo ${{contains('hello', 'll')}}
+          echo ${{contains('hello', 'no')}}
+          echo ${{startsWith('hello', 'he')}}
+          echo ${{endsWith('hello', 'lo')}}
+          echo ${{format('Hello {0}{1}{2}', 'World', '!', '!')}}
+ 
