@@ -21,4 +21,13 @@ jobs:
         run: |
           git remote add origin "https://$GITHUB_ACTOR:${{secrets.GITHUB_TOKEN}}@github.com/$GITHUB_REPOSITORY.git"
           git remote -vv
+        # origin	***github.com/xtechware/github-actions-test.git (fetch)
+        # origin	***github.com/xtechware/github-actions-test.git (push)
+      - name: Pull Origin Remote Main
+        # remember to push you will need git config --global user.email and user.name
+        run: |
+          git fetch --all
+          git checkout -b main --track origin/main
+          git pull
+          ls -al
     
