@@ -14,17 +14,17 @@ jobs:
           STEP_ENV: Available only in this step 
         run: |
           echo "WF_ENV: ${WF_ENV}"
-          echo "JOB_ENV: ${WF_ENV}"
-          echo "STEP_ENV: ${WF_ENV}"
+          echo "JOB_ENV: ${JOB_ENV}"
+          echo "STEP_ENV: ${STEP_ENV}"  
       - name: Log ENV2 Variables
         run: |
           echo "WF_ENV: ${WF_ENV}"
-          echo "JOB_ENV: ${WF_ENV}"
-          echo "STEP_ENV: ${WF_ENV}"
+          echo "JOB_ENV: ${JOB_ENV}"
+          echo "STEP_ENV: ${STEP_ENV}"  
   log-default-env:
     runs-on: ubuntu-latest
     steps:
       - name: Default ENV Variables
         run: |
-          printenv | grep 'GITHUB\HOME\_ENV'
+          printenv | grep 'GITHUB\|HOME\|_ENV'
        
