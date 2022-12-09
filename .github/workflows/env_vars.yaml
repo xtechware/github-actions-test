@@ -7,6 +7,8 @@ env:
   # encrypted env var/Secret
   # https://docs.github.com/actions/automating-your-workflow-with-github-actions/creating-and-using-encrypted-secrets
   SECRET_ENV: ${{secrets.SECRET_ENV}}
+  # default secret
+  GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
 jobs:
   log-env:
     runs-on: ubuntu-latest
@@ -21,18 +23,22 @@ jobs:
           echo "JOB_ENV: ${JOB_ENV}"
           echo "STEP_ENV: ${STEP_ENV}"
           echo "SECRET_ENV: ${SECRET_ENV}"
+          echo "GITHUB_TOKEN: ${GITHUB_TOKEN}"
         # WF_ENV: Available to all jobs
         # JOB_ENV: Available to all steps in this job (log-env)
         # STEP_ENV: Available only in this step
+        # SECRET_ENV: ***
       - name: Log ENV2 Variables
         run: |
           echo "WF_ENV: ${WF_ENV}"
           echo "JOB_ENV: ${JOB_ENV}"
           echo "STEP_ENV: ${STEP_ENV}"  
           echo "SECRET_ENV: ${SECRET_ENV}"
+          echo "GITHUB_TOKEN: ${GITHUB_TOKEN}"
         # WF_ENV: Available to all jobs
         # JOB_ENV: Available to all steps in this job (log-env)
         # STEP_ENV: 
+        # SECRET_ENV: ***
   log-default-env:
     runs-on: ubuntu-latest
     steps:
@@ -60,6 +66,7 @@ jobs:
         # GITHUB_REF_PROTECTED=false
         # HOME=/home/runner
         # GITHUB_API_URL=https://api.github.com
+        # SECRET_ENV=***
         # GITHUB_STATE=/home/runner/work/_temp/_runner_file_commands/save_state_fa810e6f-a7e5-4224-8542-6109adfee902
         # GITHUB_ENV=/home/runner/work/_temp/_runner_file_commands/set_env_fa810e6f-a7e5-4224-8542-6109adfee902
         # GITHUB_EVENT_PATH=/home/runner/work/_temp/_github_workflow/event.json
