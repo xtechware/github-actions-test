@@ -16,7 +16,10 @@ jobs:
         run: |
           echo "WF_ENV: ${WF_ENV}"
           echo "JOB_ENV: ${JOB_ENV}"
-          echo "STEP_ENV: ${STEP_ENV}"  
+          echo "STEP_ENV: ${STEP_ENV}"
+          echo "SECRET_ENV: ${SECRET_ENV}"
+        # encrypted env var/Secret
+        # https://docs.github.com/actions/automating-your-workflow-with-github-actions/creating-and-using-encrypted-secrets
         # WF_ENV: Available to all jobs
         # JOB_ENV: Available to all steps in this job (log-env)
         # STEP_ENV: Available only in this step
@@ -25,6 +28,7 @@ jobs:
           echo "WF_ENV: ${WF_ENV}"
           echo "JOB_ENV: ${JOB_ENV}"
           echo "STEP_ENV: ${STEP_ENV}"  
+          echo "SECRET_ENV: ${SECRET_ENV}"
         # WF_ENV: Available to all jobs
         # JOB_ENV: Available to all steps in this job (log-env)
         # STEP_ENV: 
