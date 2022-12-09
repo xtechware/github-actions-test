@@ -4,6 +4,8 @@ jobs:
   run-linux-commands:
     runs-on: ubuntu-latest
     steps:
+      - name: Init Empty Local Clone
+        run: git init
       - name: Create Origin Remote
         run: git remote add origin "https://$GITHUB_ACTOR:${{secrets.GITHUB_TOKEN}}@github.com/$GITHUB_REPOSITORY.git"
     
