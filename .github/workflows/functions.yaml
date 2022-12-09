@@ -2,7 +2,7 @@
 name: Functions testing
 on: [push, workflow_dispatch]
 jobs:
-  Some Functions:
+  Some-Functions:
     runs-on: ubuntu-latest
     steps:
       - name: String Functions
