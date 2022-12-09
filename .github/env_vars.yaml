@@ -1,0 +1,30 @@
+# also see shell_commands.yaml for all default environment variables
+name: Environment Variables
+on: [push, workflow_dispatch, pull_request]
+env:
+  WF_ENV: Available to all jobs
+jobs:
+  log-env:
+    runs-on: ubuntu-latest
+    env:
+      JOB_ENV: Available to all steps in this job (log-env)
+    steps:
+      - name: Log ENV Variables
+        env:
+          STEP_ENV: Available only in this step 
+        run: |
+          echo "WF_ENV: ${WF_ENV}"
+          echo "JOB_ENV: ${WF_ENV}"
+          echo "STEP_ENV: ${WF_ENV}"
+      - name: Log ENV2 Variables
+        run: |
+          echo "WF_ENV: ${WF_ENV}"
+          echo "JOB_ENV: ${WF_ENV}"
+          echo "STEP_ENV: ${WF_ENV}"
+  log-default-env:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Default ENV Variables
+        run: |
+          printenv | grep 'GITHUB\HOME\_ENV'
+       
