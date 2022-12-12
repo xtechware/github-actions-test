@@ -4,14 +4,23 @@ on: [push, workflow_dispatch]
 # https://github.com/actions/setup-node
 jobs:
   node-version:
-    runs-on: ubuntu-latest
-
+    # using matrix strategy will run job for matrix entry
+    strategy:
+      matrix:
+        node_version: [6,8,10]
+        os: [macos-latest, ubuntu-latest, windows-latest]
+      # failfast will cause any remaining jobs to fail if one job fails
+      # failfast: true
+      # max-parrallel - by default GitHub optimizes the parrallelism but you can force
+      # max-parallel: 2
+    # use matrix defined OS
+    runs-on: ${{matrix.os}}
     steps:
     - name: Log node node-version
       run: node -v
-    # step to install node version 6
+    # step to install node version based on matrix value
     - uses: actions/setup-node@v1
       with:
-        node-version: 6
+        node-version: ${{matrix.node_version}}
     - name: Log node node-version
       run: node -v
