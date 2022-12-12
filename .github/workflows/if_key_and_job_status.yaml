@@ -43,7 +43,6 @@ jobs:
         run: |
           echo "Failing this step"
           exit 1
-      - name: Error Above Ignored
   Continue-On-Error-Step-Logic-Test-Job:
     runs-on: ubuntu-latest
     steps:
