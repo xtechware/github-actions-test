@@ -26,12 +26,13 @@ jobs:
           echo "Failing this step"
           exit 1
       - name: Run on failure
+        # this condition negates the default to skip steps when previous fails
         if: failure()
         run: echo "Previous step failed"
-      - name: Nonfailing Function
+      - name: Unconditional Function Will Skip On Failure
         run: |
           echo "Nonfailing step"
       # will never run here
-      - name: Run on failure
+      - name: Run on failure2
         if: failure()
-        run: echo "Previous setp failied"        
+        run: echo "A previous step failied"        
