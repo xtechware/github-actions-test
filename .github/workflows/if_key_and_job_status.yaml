@@ -1,0 +1,20 @@
+# some contexts and dumping
+name: If Key and Job Status Testing
+on: [push, workflow_dispatch]
+jobs:
+  Push Job:
+    runs-on: ubuntu-latest
+    # conditional on job execution
+    # run on push only
+    if: github.event_name == 'push'
+    steps:
+      - name: String Functions
+        run: echo "Push event Logic Invoked"
+  Dispatch Job:
+    runs-on: ubuntu-latest
+    # conditional on job execution
+    # run on workflow_dispatch only
+    if: github.event_name == 'workflow_dispatch'
+    steps:
+      - name: String Functions
+        run: echo "Workflow Dispatch Logic Invoked"
