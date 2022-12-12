@@ -1,0 +1,17 @@
+name: Matrix
+on: [push, workflow_dispatch]
+# example setting up node js using
+# https://github.com/actions/setup-node
+jobs:
+  node-version:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Log node node-version
+      run: node -v
+    # step to install node version 6
+    - uses: actions/setup-node@v1
+      with:
+        node-version: 6
+    - name: Log node node-version
+      run: node -v
