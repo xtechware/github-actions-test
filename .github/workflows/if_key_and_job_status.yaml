@@ -18,6 +18,7 @@ jobs:
     steps:
       - name: String Functions
         run: echo "Workflow Dispatch Logic Invoked"
+  # test for failure(), always(), success() and cancel() step statuses
   Always-Run-Step-Logic-Test-Job:
     runs-on: ubuntu-latest
     steps:
@@ -26,7 +27,8 @@ jobs:
           echo "Failing this step"
           exit 1
       - name: Run on failure
-        # this condition negates the default to skip steps when previous fails
+        # this condition negates the default which is to skip steps when previous fails
+        # can also use always(), success() and cancel()
         if: failure()
         run: echo "Previous step failed"
       - name: Unconditional Function Will Skip On Failure
