@@ -4,11 +4,20 @@ on: [push, workflow_dispatch]
 # https://github.com/actions/setup-node
 jobs:
   node-version:
-    # using matrix strategy will run job for matrix entry
+    # using matrix strategy will run job for each matrix combination
     strategy:
       matrix:
+        # this actually runs 9 jobs, one for each node_version/os combination
         node_version: [6,8,10]
         os: [macos-latest, ubuntu-latest, windows-latest]
+        # you can exclude cobinations e.g.
+        exclude:
+          - os: macos-latest
+            node_version: 8
+          - os: windows-latest
+            node_version: 6
+          - os: windows-latest
+            node_version: 8
       # failfast will cause any remaining jobs to fail if one job fails
       # failfast: true
       # max-parrallel - by default GitHub optimizes the parrallelism but you can force
