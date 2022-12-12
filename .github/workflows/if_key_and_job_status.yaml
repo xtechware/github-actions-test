@@ -1,4 +1,3 @@
-# some contexts and dumping
 name: If Key and Job Status Testing
 on: [push, workflow_dispatch]
 jobs:
@@ -45,3 +44,8 @@ jobs:
       - name: Error Above Ignored
         run: |
           echo "continue-on-error true on above failed step"
+  Sleep-5-Minutes-Timeout-2-Minutes:
+    runs-on: ubuntu-latest
+    # set job timeout - default is 360 minutes
+  timeout-minutes: 2
+  run: sleep 5m
