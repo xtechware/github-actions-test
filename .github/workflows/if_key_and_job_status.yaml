@@ -46,6 +46,8 @@ jobs:
           echo "continue-on-error true on above failed step"
   Sleep-5-Minutes-Timeout-2-Minutes:
     runs-on: ubuntu-latest
+    steps:
     # set job timeout - default is 360 minutes
-  timeout-minutes: 2
-  run: sleep 5m
+    - name: Sleep 5 minutes
+      timeout-minutes: 2
+      run: sleep 5m
