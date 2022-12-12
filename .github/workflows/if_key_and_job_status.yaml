@@ -20,9 +20,6 @@ jobs:
         run: echo "Workflow Dispatch Logic Invoked"
   Always-Run-Step-Logic-Test-Job:
     runs-on: ubuntu-latest
-    # conditional on job execution
-    # run on workflow_dispatch only
-    if: github.event_name == 'workflow_dispatch'
     steps:
       - name: Failing Function
         run: |
