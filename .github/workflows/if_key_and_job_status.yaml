@@ -34,7 +34,25 @@ jobs:
       - name: Unconditional Function Will Skip On Failure
         run: |
           echo "Nonfailing step"
-      # will never run here
       - name: Run on failure2
         if: failure()
-        run: echo "A previous step failied"        
+        run: echo "A previous step failied"  
+      # failures in this funciton will be ignored due to continue-on-error      
+      - name: Failing Function
+        continue-on-error: true
+        run: |
+          echo "Failing this step"
+          exit 1
+      - name: Error Above Ignored
+  Continue-On-Error-Step-Logic-Test-Job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Failing Function
+        continue-on-error: true
+        run: |
+          echo "Failing this step"
+          exit 1
+      - name: Error Above Ignored
+        run: |
+          echo "continue-on-error true on above failed step"
+          exit 1
