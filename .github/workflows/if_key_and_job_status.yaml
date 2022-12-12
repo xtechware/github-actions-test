@@ -2,7 +2,7 @@
 name: If Key and Job Status Testing
 on: [push, workflow_dispatch]
 jobs:
-  Push Job:
+  Push-Job:
     runs-on: ubuntu-latest
     # conditional on job execution
     # run on push only
@@ -10,7 +10,7 @@ jobs:
     steps:
       - name: String Functions
         run: echo "Push event Logic Invoked"
-  Dispatch Job:
+  Dispatch-Job:
     runs-on: ubuntu-latest
     # conditional on job execution
     # run on workflow_dispatch only
