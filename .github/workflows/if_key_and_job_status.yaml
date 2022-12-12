@@ -18,3 +18,23 @@ jobs:
     steps:
       - name: String Functions
         run: echo "Workflow Dispatch Logic Invoked"
+  Always-Run-Step-Logic-Test-Job:
+    runs-on: ubuntu-latest
+    # conditional on job execution
+    # run on workflow_dispatch only
+    if: github.event_name == 'workflow_dispatch'
+    steps:
+      - name: Failing Function
+        run: |
+          echo "Failing this step"
+          exit 1
+      - name: Run on failure
+        if: failure()
+        run: echo "Previous step failed"
+      - name: Nonfailing Function
+        run: |
+          echo "Nonfailing step"
+      # will never run here
+      - name: Run on failure
+        if: failure()
+        run: echo "Previous setp failied"        
