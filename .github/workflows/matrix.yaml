@@ -18,6 +18,12 @@ jobs:
             node_version: 6
           - os: windows-latest
             node_version: 8
+        # you can add variables to specific matrix entries using include
+        include:
+          - os: windows-latest
+            node_version: 8
+            desired_version: "true"
+
       # failfast will cause any remaining jobs to fail if one job fails
       # failfast: true
       # max-parrallel - by default GitHub optimizes the parrallelism but you can force
@@ -32,4 +38,6 @@ jobs:
       with:
         node-version: ${{matrix.node_version}}
     - name: Log node node-version
-      run: node -v
+      run: |
+        node -v
+        echo "${{matrix.desired_version}}"
